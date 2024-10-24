@@ -15,7 +15,7 @@ class FlowerController extends Controller
 
     public function create()
     {
-        return view('create'); // Adjust this to match your file structure
+        return view('create'); 
     }
 
     public function store(Request $request)
@@ -25,11 +25,9 @@ class FlowerController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric'
         ]);
-
-        // Create a new flower in the database
         Flower::create($validated);
 
-        return redirect()->route('home')->with('success', 'Flower added successfully!'); // Redirect to home
+        return redirect()->route('home')->with('success', 'Flower added successfully!'); 
     }
 
     public function edit(Flower $flower)

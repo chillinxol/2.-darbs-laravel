@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery for AJAX -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home</title>
     <style>
         body {
             background-image: url('https://img.freepik.com/premium-vector/watercolor-frame-flowers-watercolor-frame-flowers_912214-117423.jpg?semt=ais_hybrid'); /* Replace with your image path */
-            background-size: cover; /* Cover the whole screen */
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Prevent repeating */
-                height: 100vh; /* Full viewport height */
-    margin: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
         }
         .container {
-            background-color: rgba(255, 255, 255, 0.8); /* Optional: semi-transparent background for better text readability */
-            border-radius: 10px; /* Optional: rounded corners */
-            padding: 20px; /* Optional: padding */
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-radius: 10px; 
+            padding: 20px;
         }
     </style>
 </head>
@@ -69,5 +71,39 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Setup CSRF for AJAX
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // AJAX for deleting a flower
+        $(document).ready(function() {
+            $('.delete-flower-form').submit(function(e) {
+                e.preventDefault(); // Prevent form submission
+
+                if (confirm('Are you sure you want to delete this flower?')) {
+                    var form = $(this);
+                    var url = form.attr('action');
+
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: form.serialize(),
+                        success: function(response) {
+                            form.closest('.col-md-4').remove(); // Remove flower from UI
+                            alert('Flower deleted successfully!');
+                        },
+                        error: function(error) {
+                            alert('Something went wrong!');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -16,7 +16,7 @@ class UserController extends Controller
 
         if (auth()->attempt(['name' => $incomingFields['loginname'], 'password' => $incomingFields['loginpassword']])) {
             $request->session()->regenerate();
-            return redirect('/flowers'); // Redirect to the home page on success
+            return redirect('/flowers'); 
         }
 
         return redirect('/login')->withErrors([
@@ -26,7 +26,7 @@ class UserController extends Controller
 
     public function logout() {
         auth()->logout();
-        return redirect('/login'); // Redirect to the login page
+        return redirect('/login');
     }
 
     public function register(Request $request) {

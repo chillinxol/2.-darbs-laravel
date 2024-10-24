@@ -21,16 +21,16 @@ Route::get('/', function () {
 // User authentication routes
 
 Route::get('/login', function () {
-    return view('login'); // Ensure you have a 'login.blade.php' view
-})->name('login'); // Add this line to name the route
+    return view('login'); 
+})->name('login'); 
 
 Route::get('/register', function () {
-    return view('register'); // Ensure you have a 'register.blade.php' view created
+    return view('register'); 
 })->name('register');
 
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout']);
-Route::post('/register', [UserController::class, 'register']);// Ensure the register route is named
+Route::post('/register', [UserController::class, 'register']);
 
 
 // Flower routes
