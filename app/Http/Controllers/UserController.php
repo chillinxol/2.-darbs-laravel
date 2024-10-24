@@ -16,7 +16,7 @@ class UserController extends Controller
 
         if (auth()->attempt(['name' => $incomingFields['loginname'], 'password' => $incomingFields['loginpassword']])) {
             $request->session()->regenerate();
-            return redirect('/'); // Redirect to the home page on success
+            return redirect('/flowers'); // Redirect to the home page on success
         }
 
         return redirect('/login')->withErrors([
@@ -39,6 +39,6 @@ class UserController extends Controller
         $incomingFields['password'] = bcrypt($incomingFields['password']);
         $user = User::create($incomingFields);
         auth()->login($user);
-        return redirect('/');
+        return redirect('/login');
     }
 }

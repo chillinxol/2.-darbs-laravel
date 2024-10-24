@@ -24,5 +24,20 @@ class FlowerSeeder extends Seeder
             'description' => 'Elegant lilies',
             'price' => 15.00,
         ]);
+        Flower::create([
+            'name' => 'Vijolīte',
+            'description' => 'Zila',
+            'price' => 12.00,
+        ]);
+        Flower::create([
+            'name' => 'Astere',
+            'description' => 'Dažādas krāsās',
+            'price' => 19.00,
+        ]);
+        Flower::create([
+            'name' => 'Kaktus',
+            'description' => 'Sapīga pieredze',
+            'price' => 69.99,
+        ]);
     }
 }
