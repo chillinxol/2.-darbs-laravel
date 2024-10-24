@@ -7,31 +7,35 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FlowerController;
 use App\Models\Flower;
 
+// Home route with a name
 Route::get('/', function () {
     $posts = [];
-    $flowers = [];
+    $flowers = Flower::all();
 
-    // Check if user is authenticated
     if (auth()->check()) {
         $posts = auth()->user()->usersCoolPosts()->latest()->get();
     }
 
-    // Fetch flowers from the database
-    $flowers = Flower::all();
-
     return view('home', ['posts' => $posts, 'flowers' => $flowers]);
-});
-
+})->name('home');
 // User authentication routes
+
 Route::get('/login', function () {
-    return view('login'); // Create this view for login
-});
+    return view('login'); // Ensure you have a 'login.blade.php' view
+})->name('login'); // Add this line to name the route
+
+Route::get('/register', function () {
+    return view('register'); // Ensure you have a 'register.blade.php' view created
+})->name('register');
+
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout']);
-Route::post('/register', [UserController::class, 'register']);
+Route::post('/register', [UserController::class, 'register']);// Ensure the register route is named
 
-// Blog post related routes
-Route::post('/create-post', [PostController::class, 'createPost']);
-Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
-Route::put('/edit-post/{post}', [PostController::class, 'actuallyUpdatePost']);
-Route::delete('/delete-post/{post}', [PostController::class, 'deletePost']);
+
+// Flower routes
+Route::get('/flowers/create', [FlowerController::class, 'create'])->name('flowers.create');
+Route::post('/flowers', [FlowerController::class, 'store'])->name('flowers.store');
+
+// Resource route for flowers (handles index, edit, update, destroy)
+Route::resource('flowers', FlowerController::class)->except(['create', 'store']);

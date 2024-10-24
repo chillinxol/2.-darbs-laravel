@@ -15,7 +15,7 @@
             <input name="loginpassword" type="password" class="form-control mb-3" placeholder="Password" required>
             <button class="btn btn-primary">Log in</button>
         </form>
-        <p class="mt-3">If you don't have an account, <a href="/">click here to register</a>.</p>
+        <p class="mt-3">If you don't have an account, <a href="/register">click here to register</a>.</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

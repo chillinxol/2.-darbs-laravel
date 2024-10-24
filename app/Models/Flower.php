@@ -15,4 +15,5 @@ class Flower extends Model
     {
         return $this->hasMany(Order::class);
     }
+
 }
